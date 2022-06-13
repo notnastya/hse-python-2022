@@ -37,6 +37,12 @@ class Employee:
         """
         Задача: реализовать конструктор класса, чтобы все тесты проходили
         """
+        self.name = name
+        self.position = position
+        if type(salary) != int:
+            raise ValueError
+        else:
+            self._salary = salary
 
         # пиши свой код здесь
 
@@ -44,6 +50,7 @@ class Employee:
         """
         Метод возвращает зарплату сотрудника.
         """
+        return self._salary
 
         # пиши свой код здесь
 
@@ -54,6 +61,13 @@ class Employee:
         Сравнение происходит по уровню позиции см. `get_position_level`.
         Если что-то идет не так - бросаются исключения. Смотрим что происходит в тестах.
         """
+        if isinstance(other, Employee):
+            try:
+                return get_position_level(self.position) == get_position_level(other.position)
+            except:
+                raise ValueError
+        else:
+            raise TypeError
 
         # пиши свой код здесь
 
@@ -62,6 +76,7 @@ class Employee:
         Задача: реализовать строковое представление объекта.
         Пример вывода: 'name: Ivan position manager'
         """
+        return f'name: {self.name} position: {self.position}'
 
         # пиши свой код здесь
 
@@ -81,6 +96,8 @@ class Developer(Employee):
         """
         Задача: реализовать конструктор класса, используя конструктор родителя
         """
+        self.language = language
+        super().__init__(name, 'developer', salary)
 
         # пиши свой код здесь
 
@@ -96,5 +113,6 @@ class Manager(Employee):
         """
         Задача: реализовать конструктор класса, используя конструктор родителя
         """
+        super().__init__(name, 'manager', salary)
 
         # пиши свой код здесь
